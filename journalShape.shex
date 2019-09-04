@@ -1,0 +1,50 @@
+PREFIX schema: <http://schema.org/> 
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+start = @<JournalMinimum>
+
+<JournalMinimum> {
+  rdf:type [schema:Periodical] ;
+  schema:issn schema:Text
+    OR xsd:string 
+    OR schema:URL 
+    OR IRI;
+  schema:name xsd:Text
+    OR xsd:string ;
+}
+
+<JournalRecommended> {
+  rdf:type [schema:Periodical] ;
+  schema:hasPart schema:PublicationIssue 
+    OR schema:PublicationVolume 
+    OR schema:ScholarlyArticle * ;
+  schema:keywords schema:Text 
+    OR xsd:string ? ;
+  schema:license schema:CreativeWork 
+    OR schema:URL 
+    OR IRI ? ;
+  schema:publisher schema:Organization 
+    OR schema:Person * ;
+  schema:url schema:URL
+    OR IRI ? ;
+}
+
+<JournalOptional> {
+  rdf:type [schema:Periodical] ;
+  schema:about schema:Thing ? ;
+  schema:alternateName schema:Text
+    OR xsd:string * ;
+  schema:editor schema:Person * ;
+  schema:inLanguage schema:Language
+    OR schema:Text
+    OR xsd:string * ;
+  schema:isAccessibleForFree schema:boolean ? ;
+  schema:publishingPrinciples schema:CreativeWork 
+    OR schema:URL
+    Or IRI ? ;
+  schema:sameAs schema:URL
+    OR IRI * ;
+}
