@@ -1,0 +1,44 @@
+{
+  "@context": "http://schema.org/",
+  "@id" : "http://my.journal.ex",
+  "@type" : "Periodical",
+  "identifier": "http://my.journal.ex",
+  "issn" : "issn:1234",
+  "name" : "A journal",
+  
+  "hasPart": {
+  	"@id": "http://my.article.ex"
+  },
+  "keywords": "k1,k2,k3",
+  "license": "http://my.license.ex",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "http://my.organization.ex"
+  },
+  "url": {
+    "@id": "http://my.journal.site.ex"
+  },
+
+  "about": {
+    "@id": "http://my.topic.ex"
+  },
+  "alternateName": ["name1", "name2"],
+  "editor": {
+    "@type": "Person",
+    "@id": "http://my.foaf.ex"
+  },
+  "inLanguage": [
+    "de",
+    "en",
+    { "@type": "Language", "description": "es"}
+  ],
+  "isAccessibleForFree": true,
+  "publishingPrinciples": "http://my.pubprinc.ex",
+  "sameAs": [
+    "http://my.same.journal.ex",
+    "http://my.journal.again.ex",
+    {
+      "@id": "http://my.journal.version.ex"
+    }
+  ]
+}
