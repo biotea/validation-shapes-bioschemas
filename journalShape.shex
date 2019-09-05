@@ -4,17 +4,8 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
 
-<TextOrString> 
-  schema:Text OR xsd:string
-
-<TextOrUrl> 
-  schema:Text OR xsd:string OR schema:URL or IRI
-  
-<Boolean>
-  schema:Boolean OR xsd:boolean
-
 <URL> 
-  schema:URL OR xsd:string OR IRI
+  xsd:string OR IRI
 
 <OrganizationOrPerson> {
   rdf:type [schema:Organization schema:Person]
@@ -28,14 +19,14 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 <JournalMinimum> {
   rdf:type [schema:Periodical] ;
   schema:identifier @<URL> ;
-  schema:issn @<TextOrString> ;
-  schema:name @<TextOrString> ;
+  schema:issn xsd:string ;
+  schema:name xsd:string ;
 }
 
 <JournalRecommended> {
   rdf:type [schema:Periodical] ;
   schema:hasPart @<JournalHasPartType> OR IRI * ;
-  schema:keywords @<TextOrString> ? ;
+  schema:keywords xsd:string ? ;
   schema:license {a [schema:CreativeWork]} 
     OR @<URL> ? ;
   schema:publisher @<OrganizationOrPerson> OR IRI * ;
@@ -45,11 +36,11 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 <JournalOptional> {
   rdf:type [schema:Periodical] ;
   schema:about {a [schema:Thing]} OR IRI * ;
-  schema:alternateName @<TextOrString> * ;
+  schema:alternateName xsd:string * ;
   schema:editor {a [schema:Person]} OR IRI * ;
   schema:inLanguage {a [schema:Language]} 
-    OR @<TextOrString> * ;
-  schema:isAccessibleForFree @<Boolean> ;
+    OR xsd:string * ;
+  schema:isAccessibleForFree xsd:boolean ;
   schema:publishingPrinciples {a [schema:CreativeWork]} 
     OR @<URL> ? ;
   schema:sameAs @<URL> * ;
