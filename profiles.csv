@@ -1,0 +1,4 @@
+Journal,Periodical,journal.yaml
+PublicationIssue,PublicationIssue,pubIssue.yaml
+PublicationVolume,PublicationVolum,pubVolume.yaml
+ScholarlyArticle,ScholarlyArticle,article.yaml
