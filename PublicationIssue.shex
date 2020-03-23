@@ -1,0 +1,35 @@
+PREFIX schema: <http://schema.org/> 
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+    <URL> 
+      xsd:string OR IRI
+    
+<PublicationIssueMinimum> {
+  rdf:type [schema:PublicationIssue] ;
+  schema:issueNumber xsd:integer OR xsd:string  ;
+}
+
+<PublicationIssueRecommended> {
+  rdf:type [schema:PublicationIssue] ;
+  schema:hasPart  {a [schema:ScholarlyArticle]} OR IRI * ;
+  schema:identifier xsd:string OR @<URL> OR {a [schema:PropertyValue]} OR IRI ? ;
+  schema:isPartOf  @<PublicationVolumeOrJournal> OR IRI * ;
+  schema:pageEnd xsd:integer OR xsd:string ? ;
+  schema:pageStart xsd:integer OR xsd:string ? ;
+  schema:url @<URL> ? ;
+}
+
+<PublicationIssueOptional> {
+  rdf:type [schema:PublicationIssue] ;
+  schema:about  {a [schema:Thing]} OR IRI ? ;
+  schema:editor  {a [schema:Person]} OR IRI * ;
+  schema:inLanguage xsd:string OR {a [schema:Language]} OR IRI * ;
+  schema:keywords xsd:string ? ;
+  schema:pagination xsd:string * ;
+  schema:sameAs @<URL> * ;
+}
+
+<PublicationVolumeOrJournal>{
+  rdf:type [ schema:PublicationVolume schema:Journal]
+}

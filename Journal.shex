@@ -1,0 +1,41 @@
+PREFIX schema: <http://schema.org/> 
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+    <URL> 
+      xsd:string OR IRI
+    
+<JournalMinimum> {
+  rdf:type [schema:Periodical] ;
+  schema:identifier @<URL>  ;
+  schema:issn xsd:string  ;
+  schema:name xsd:string  ;
+}
+
+<JournalRecommended> {
+  rdf:type [schema:Periodical] ;
+  schema:hasPart  @<PublicationIssueOrPublicationVolumeOrScholarlyArticle> OR IRI * ;
+  schema:keywords xsd:string ? ;
+  schema:license @<URL> OR {a [schema:CreativeWork]} OR IRI ? ;
+  schema:publisher  @<OrganizationOrPerson> OR IRI * ;
+  schema:url @<URL> ? ;
+}
+
+<JournalOptional> {
+  rdf:type [schema:Periodical] ;
+  schema:about  {a [schema:Thing]} OR IRI * ;
+  schema:alternateName xsd:string * ;
+  schema:editor  {a [schema:Person]} OR IRI * ;
+  schema:inLanguage xsd:string OR {a [schema:Language]} OR IRI * ;
+  schema:isAccessibleForFree xsd:boolean ? ;
+  schema:publishingPrinciples @<URL> OR {a [schema:CreativeWork]} OR IRI ? ;
+  schema:sameAs @<URL> * ;
+}
+
+<PublicationIssueOrPublicationVolumeOrScholarlyArticle>{
+  rdf:type [ schema:PublicationIssue schema:PublicationVolume schema:ScholarlyArticle]
+}
+
+<OrganizationOrPerson>{
+  rdf:type [ schema:Organization schema:Person]
+}

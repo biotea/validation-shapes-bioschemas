@@ -1,0 +1,66 @@
+PREFIX schema: <http://schema.org/> 
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+    <URL> 
+      xsd:string OR IRI
+    
+<ScholarlyArticleMinimum> {
+  rdf:type [schema:ScholarlyArticle] ;
+  schema:headline xsd:string  ;
+  schema:identifier xsd:string OR @<URL> OR {a [schema:PropertyValue]} OR IRI  ;
+}
+
+<ScholarlyArticleRecommended> {
+  rdf:type [schema:ScholarlyArticle] ;
+  schema:alternateName xsd:string * ;
+  schema:author  @<OrganizationOrPerson> OR IRI * ;
+  schema:backstory xsd:string OR {a [schema:CreativeWork]} OR IRI ? ;
+  schema:citation xsd:string OR {a [schema:CreativeWork]} OR IRI * ;
+  schema:about  @<ThingOrSemanticAnnotation> OR IRI * ;
+  schema:dateCreated xsd:date OR xsd:dateTime ? ;
+  schema:dateModified xsd:date OR xsd:dateTime * ;
+  schema:datePublished xsd:date ? ;
+  schema:isBasedOn @<URL> OR @<CreativeWorkOrProduct> OR IRI * ;
+  schema:isPartOf  @<CreativeWorkOrTripOrJournalOrPublicationVolumeOrPublicationIssue> OR IRI * ;
+  schema:keywords xsd:string ? ;
+  schema:license @<URL> OR {a [schema:CreativeWork]} OR IRI ? ;
+  schema:pageEnd xsd:integer OR xsd:string ? ;
+  schema:pageStart xsd:integer OR xsd:string ? ;
+  schema:url @<URL> ? ;
+}
+
+<ScholarlyArticleOptional> {
+  rdf:type [schema:ScholarlyArticle] ;
+  schema:alternativeHeadline xsd:string ? ;
+  schema:articleBody xsd:string * ;
+  schema:articleSection xsd:string * ;
+  schema:copyrightHolder  @<OrganizationOrPerson> OR IRI * ;
+  schema:copyrightYear xsd:double ? ;
+  schema:inLanguage xsd:string OR {a [schema:Language]} OR IRI * ;
+  schema:isAccessibleForFree xsd:boolean ? ;
+  schema:pagination xsd:string * ;
+  schema:sameAs @<URL> * ;
+  schema:version xsd:double OR xsd:string * ;
+  schema:wordCount xsd:integer ? ;
+}
+
+<OrganizationOrPerson>{
+  rdf:type [ schema:Organization schema:Person]
+}
+
+<ThingOrSemanticAnnotation>{
+  rdf:type [ schema:Thing schema:SemanticAnnotation]
+}
+
+<CreativeWorkOrProduct>{
+  rdf:type [ schema:CreativeWork schema:Product]
+}
+
+<CreativeWorkOrTripOrJournalOrPublicationVolumeOrPublicationIssue>{
+  rdf:type [ schema:CreativeWork schema:Trip schema:Journal schema:PublicationVolume schema:PublicationIssue]
+}
+
+<OrganizationOrPerson>{
+  rdf:type [ schema:Organization schema:Person]
+}

@@ -1,0 +1,35 @@
+PREFIX schema: <http://schema.org/> 
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+    <URL> 
+      xsd:string OR IRI
+    
+<DatasetMinimum> {
+  rdf:type [schema:Dataset] ;
+  schema:description xsd:string  ;
+  schema:identifier xsd:string OR @<URL> OR {a [schema:PropertyValue]} OR IRI + ;
+  schema:keywords xsd:string + ;
+  schema:name xsd:string  ;
+  schema:url @<URL>  ;
+}
+
+<DatasetRecommended> {
+  rdf:type [schema:Dataset] ;
+  schema:citation xsd:string OR {a [schema:CreativeWork]} OR IRI * ;
+  schema:creator  @<OrganizationOrPerson> OR IRI * ;
+  schema:distribution  {a [schema:DataDownload]} OR IRI ? ;
+  schema:includedInDataCatalog  {a [schema:DataCatalog]} OR IRI * ;
+  schema:license @<URL> OR {a [schema:CreativeWork]} OR IRI ? ;
+  schema:measurementTechnique xsd:string OR @<URL> * ;
+  schema:variableMeasured xsd:string OR {a [schema:PropertyValue]} OR IRI * ;
+  schema:version xsd:double OR xsd:string ? ;
+}
+
+<DatasetOptional> {
+  rdf:type [schema:Dataset] ;
+}
+
+<OrganizationOrPerson>{
+  rdf:type [ schema:Organization schema:Person]
+}
