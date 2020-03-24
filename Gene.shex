@@ -1,9 +1,10 @@
 PREFIX schema: <http://schema.org/> 
-    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
-    <URL> 
-      xsd:string OR IRI
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> 
+
+URL> 
+  xsd:string OR IRI
     
 <GeneMinimum> {
   rdf:type [schema:Gene] ;
@@ -14,10 +15,10 @@ PREFIX schema: <http://schema.org/>
 <GeneRecommended> {
   rdf:type [schema:Gene] ;
   schema:description xsd:string ? ;
+  schema:encodes @<URL> OR @<BioChemEntityOrProtein> OR IRI * ;
   schema:hasRepresentation xsd:string OR @<URL> OR {a [schema:PropertyValue]} OR IRI * ;
   schema:image @<URL> OR {a [schema:ImageObject]} OR IRI ? ;
-  schema:isContainedIn  {a [schema:BioChemEntity]} OR IRI * ;
-  schema:isTranslatedInto  @<BioChemEntityOrbioschemas:Protein> OR IRI * ;
+  schema:isPartOfBioChemEntity  {a [schema:BioChemEntity]} OR IRI * ;
   schema:url @<URL> ? ;
 }
 
@@ -26,30 +27,26 @@ PREFIX schema: <http://schema.org/>
   schema:additionalProperty  {a [schema:PropertyValue]} OR IRI * ;
   schema:additionalType @<URL> * ;
   schema:alternateName xsd:string * ;
-  schema:categoryCode  {a [schema:CategoryCode]} OR IRI * ;
-  schema:contains  {a [schema:BioChemEntity]} OR IRI * ;
+  schema:associatedDisease @<URL> OR {a [schema:MedicalCondition]} OR IRI * ;
   schema:enablesMF  @<CategoryCodeOrPropertyValue> OR IRI * ;
-  schema:encodes  {a [schema:BioChemEntity]} OR IRI * ;
+  schema:hasBioChemEntityPart  {a [schema:BioChemEntity]} OR IRI * ;
+  schema:hasCategoryCode  {a [schema:CategoryCode]} OR IRI * ;
   schema:involvedInBP  @<CategoryCodeOrPropertyValue> OR IRI * ;
   schema:isTranscribedInto  {a [schema:BioChemEntity]} OR IRI * ;
-  schema:isVariantOf  @<BioChemEntityOrbioschemas:Gene> OR IRI * ;
-  schema:location xsd:string OR @<URL> OR @<PlaceOrPostalAddressOrPropertyValue> OR IRI * ;
+  schema:isVariantOf  @<BioChemEntityOrbioschemasGene> OR IRI * ;
   schema:mainEntityOfPage @<URL> OR {a [schema:CreativeWork]} OR IRI ? ;
   schema:sameAs @<URL> * ;
+  schema:taxonomicRange xsd:string OR @<URL> OR {a [schema:Taxon]} OR IRI * ;
+}
+
+<BioChemEntityOrProtein>{
+  rdf:type [ schema:BioChemEntity schema:Protein]
+}
+
+<BioChemEntityOrbioschemasGene>{
+  rdf:type [ schema:BioChemEntity schema:Gene]
 }
 
 <CategoryCodeOrPropertyValue>{
   rdf:type [ schema:CategoryCode schema:PropertyValue]
-}
-
-<BioChemEntityOrbioschemas:Protein>{
-  rdf:type [ schema:BioChemEntity schema:bioschemas:Protein]
-}
-
-<PlaceOrPostalAddressOrPropertyValue>{
-  rdf:type [ schema:Place schema:PostalAddress schema:PropertyValue]
-}
-
-<BioChemEntityOrbioschemas:Gene>{
-  rdf:type [ schema:BioChemEntity schema:bioschemas:Gene]
 }

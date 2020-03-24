@@ -45,20 +45,16 @@ PREFIX schema: <http://schema.org/>
   schema:wordCount xsd:integer ? ;
 }
 
-<OrganizationOrPerson>{
-  rdf:type [ schema:Organization schema:Person]
-}
-
-<ThingOrSemanticAnnotation>{
-  rdf:type [ schema:Thing schema:SemanticAnnotation]
+<CreativeWorkOrTripOrJournalOrPublicationVolumeOrPublicationIssue>{
+  rdf:type [ schema:CreativeWork schema:Trip schema:Journal schema:PublicationVolume schema:PublicationIssue]
 }
 
 <CreativeWorkOrProduct>{
   rdf:type [ schema:CreativeWork schema:Product]
 }
 
-<CreativeWorkOrTripOrJournalOrPublicationVolumeOrPublicationIssue>{
-  rdf:type [ schema:CreativeWork schema:Trip schema:Journal schema:PublicationVolume schema:PublicationIssue]
+<ThingOrSemanticAnnotation>{
+  rdf:type [ schema:Thing schema:SemanticAnnotation]
 }
 
 <OrganizationOrPerson>{
